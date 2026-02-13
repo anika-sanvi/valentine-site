@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For My Special One ❤️</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Loading screen */
+#loader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #ff4d6d;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  z-index: 999;
+}
+
+/* Hearts animation */
+.heart {
+  position: fixed;
+  top: -10px;
+  font-size: 20px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  margin: 10px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+#yesBtn {
+  background-color: #ff4d6d;
+  color: white;
+}
+
+#noBtn {
+  background-color: white;
+  color: #ff4d6d;
+}
+</style>
+</head>
+
+<body>
+
+<div id="loader">Loading something special... 💖</div>
+
+<h1 id="mainText" style="display:none;">
+Will You Be My Valentine, Piyush? 💖
+</h1>
+
+<div id="buttons" style="display:none;">
+  <button id="yesBtn" onclick="yesClicked()">YES 💘</button>
+  <button id="noBtn" onclick="noClicked()">NO 💔</button>
+</div>
+
+<audio id="bgMusic" loop>
+  <source src="romantic.mp3" type="audio/mp3">
+</audio>
+<script>
+
+// Loading screen delay
+setTimeout(() => {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("mainText").style.display = "block";
+  document.getElementById("buttons").style.display = "block";
+}, 2500);
+
+let noCount = 0;
+
+function yesClicked() {
+  const music = document.getElementById("bgMusic");
+  music.play();
+
+  document.getElementById("mainText").innerHTML =
+    "Best decision of your life, Mr. Valentine 💘";
+
+  document.getElementById("buttons").style.display = "none";
+
+  const loveText = document.createElement("p");
+  loveText.style.color = "white";
+  loveText.style.fontSize = "22px";
+  loveText.innerHTML = "I love you too, my love ❤️";
+  document.body.appendChild(loveText);
+
+  startHearts();
+}
+function noClicked() {
+  noCount++;
+
+  if (noCount < 4) {
+    const button = document.getElementById("noBtn");
+    button.style.position = "absolute";
+    button.style.top = Math.random() * window.innerHeight + "px";
+    button.style.left = Math.random() * window.innerWidth + "px";
+  } else {
+    document.getElementById("noBtn").style.display = "none";
+  }
+}
+
+function startHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }, 300);
+}
+
+</script>
+
+</body>
+</html>
